@@ -1,0 +1,4 @@
+.modal--active{
+    background: rgba(0,0,0,0.4);
+    display: block;
+}
