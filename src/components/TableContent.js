@@ -1,7 +1,6 @@
 import React from 'react';
 import TableBody from "./TableBody"
 function TableContent({table_date}) {
-
     const RenderTableHeader = () => Object?.keys(table_date[0])?.map((key,index)=><th key={index} scope="col">{key}</th>)
 
     return (
