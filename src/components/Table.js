@@ -5,9 +5,10 @@ import Pagination from "./Pagination";
 const Table  = ({table_date,UpdateSortValues}) => {
     let [activ_filter,set_activ_filter] = useState({colum:'id',type_filter:'>',text_filter:''})
     let [pagination_active, set_pagination_active] = useState(1)
-    let[base_pagination_size, set_base_pagination_size] = useState(Math.ceil(table_date.length/4))
+    let [base_pagination_size, set_base_pagination_size] = useState(Math.ceil(table_date.length/4))
+
     useEffect(()=>{
-        set_base_pagination_size(Math.ceil(table_date.length/4))
+        set_base_pagination_size(Math.ceil(MemoizedTableFilter.length/4))
     },[table_date])
 
     let filter_name = [
@@ -23,7 +24,6 @@ const Table  = ({table_date,UpdateSortValues}) => {
         {text:'Содержит', value:'includes'},
     ]
 
-
     const UpdateActiveItem = (value) => set_pagination_active(value)
     const TableFilter = () =>{
         const filter_functions = {
@@ -36,7 +36,7 @@ const Table  = ({table_date,UpdateSortValues}) => {
     }
 
     const MemoizedTableFilter = useMemo(()=> TableFilter(),[activ_filter,table_date])
-    const PaginationSize = useMemo(()=> MemoizedTableFilter
+    const VisibleItems = useMemo(()=> MemoizedTableFilter
         .slice(base_pagination_size * (pagination_active - 1) , pagination_active * base_pagination_size),[pagination_active,table_date,base_pagination_size])
     const UpdateFilterValues = (key,value) => {
         let new_activ_filter = {...activ_filter}
@@ -55,14 +55,14 @@ const Table  = ({table_date,UpdateSortValues}) => {
             <div className="d-flex justify-content-center">
                 <Pagination
                     UpdateActiveItem={UpdateActiveItem}
-                    size={table_date.length/base_pagination_size}
+                    size={MemoizedTableFilter.length/base_pagination_size}
                     active_item={pagination_active}
                 />
             </div>
 
             {MemoizedTableFilter.length > 0
                 ? <TableContent
-                    table_date={PaginationSize}/>
+                    table_date={VisibleItems}/>
                 : <h2 className="h2 text-center">Записей нет</h2>}
         </section>
     );
