@@ -1,9 +1,12 @@
 import React from 'react';
 import Form from "./Form";
-function Modal({open,Close,AddNewTableItem}) {
+import {ModalPropsType} from './interface'
+
+function Modal({open,Close,AddNewTableItem}: ModalPropsType) {
+
     let modal_style = 'modal show  fade ' + (open ? 'modal--active' : ' ')
     return (
-        <div onClick={Close} className={modal_style} tabIndex="1">
+        <div onClick={Close} className={modal_style} tabIndex={1}>
             <div className="modal-dialog">
                 <div onClick={event => event.stopPropagation()} className="modal-content">
                     <div className="modal-header">

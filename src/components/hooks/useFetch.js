@@ -12,7 +12,8 @@ function useFetch (url,function_set,method="GET",body = '') {
         return data
     }
     useEffect(  ()=>{
-        FetchGet().then(data => function_set(data))
+        FetchGet().then(data => {
+            function_set(data)})
     },[])
 }
 export  default  useFetch

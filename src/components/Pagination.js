@@ -1,8 +1,9 @@
 import React from 'react';
 
+
 function Pagination({size,active_item,UpdateActiveItem}) {
     const RenderArray = Array(Math.floor(size)).fill().map((e, i) => i + 1)
-    const RenderPaginationsItems = () => RenderArray.map(el =>
+    const RenderPaginationItems = () => RenderArray.map(el =>
             <li
                 key={el}
                 onClick={( () => UpdateActiveItem(el))}
@@ -13,7 +14,7 @@ function Pagination({size,active_item,UpdateActiveItem}) {
     return (
         <nav aria-label=" Page navigation example">
             <ul className="pagination">
-                {RenderPaginationsItems()}
+                {RenderPaginationItems()}
             </ul>
         </nav>
     );

@@ -5,10 +5,9 @@ import Pagination from "./Pagination";
 const Table  = ({table_date,UpdateSortValues}) => {
     let [activ_filter,set_activ_filter] = useState({colum:'id',type_filter:'>',text_filter:''})
     let [pagination_active, set_pagination_active] = useState(1)
-    let [base_pagination_size, set_base_pagination_size] = useState(Math.ceil(table_date.length/4))
-
+    let [base_pagination_size, set_base_pagination_size] = useState(Math.max(1, Math.ceil(table_date.length/4)))
     useEffect(()=>{
-        set_base_pagination_size(Math.ceil(MemoizedTableFilter.length/4))
+        set_base_pagination_size(Math.max(1, Math.ceil(table_date.length/4)))
     },[table_date])
 
     let filter_name = [
