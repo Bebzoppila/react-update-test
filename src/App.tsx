@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from "./components/Table";
 import Modal from "./components/Modal";
 import './style/main.css'
-import React,{useState,useMemo} from "react";
+import React,{useState} from "react";
 import useFetch from "./components/hooks/useFetch";
 import useSort from "./components/hooks/useSort";
 import {NewTableItemType,TableItem} from "./components/interface"
@@ -14,8 +14,8 @@ function App() {
     const [table_date,set_table_date] = useState<Array<TableItem>>([{userId:2,id:0,title:'awd',body:'awdad'}])
     const SordetDate = useSort(table_date,colum_sort)
     useFetch('https://jsonplaceholder.typicode.com/posts',set_table_date)
-    const CloseModal = () => set_modal_is_open(false)
-    const OpenModal = () => set_modal_is_open(true)
+    const CloseModal = (event:MouseEvent) => set_modal_is_open(false)
+    const OpenModal = (event:MouseEvent) => set_modal_is_open(true)
 
 
     const AddNewTableItem = (new_table_item:NewTableItemType):void => {
